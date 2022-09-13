@@ -12,7 +12,7 @@ export const BackButton: FC<BackButtonProps> = ({ color }) => {
   const theme = useTheme();
 
   return (
-    <S.Container>
+    <S.Container activeOpacity={0.6}>
       <MaterialIcons 
         name='chevron-left'
         size={24}
