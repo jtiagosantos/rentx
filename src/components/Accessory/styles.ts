@@ -7,6 +7,7 @@ export const Container = styled.View`
   background-color: ${({ theme }) => theme.colors.background_primary};
   padding: 16px;
   margin-bottom: 8px;
+  border-radius: 2px;
 
   justify-content: center;
   align-items: center;
