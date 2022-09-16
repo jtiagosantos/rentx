@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar, ListRenderItemInfo } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useNavigation } from '@react-navigation/native';
 
+//services
+import { getCarsService } from '../../services/cars/getCarsService';
+
 //components
 import { CardCar } from '../../components/CardCar/CardCar';
+import { Loading } from '../../components/Loading/Loading';
+
+//utils
+import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
+
+//types
+import { Car } from '../../types/Car';
 
 //assets
 import Logo from '../../assets/logo.svg';
@@ -14,35 +24,32 @@ import * as S from './styles';
 
 export const Home = () => {
   const navigation = useNavigation();
+  const [cars, setCars] = useState<Car[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const mockedCars = [
-    {
-      id: 1,
-      brand: 'AUDI',
-      name: 'RS 5 Coupé',
-      rent: {
-        period: 'Ao dia',
-        price: 'R$ 120',
-      },
-      thumbnail: 'https://www.webmotors.com.br/imagens/prod/348415/AUDI_RS5_2.9_V6_TFSI_GASOLINA_SPORTBACK_QUATTRO_STRONIC_34841516415001715.webp?s=fill&w=236&h=135&q=70&t=true',
-    },
-    {
-      id: 2,
-      brand: 'AUDI',
-      name: 'RS 5 Coupé',
-      rent: {
-        period: 'Ao dia',
-        price: 'R$ 120',
-      },
-      thumbnail: 'https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/homepage/families-gallery/2022/04_12/family_chooser_tecnica_m.png',
-    },
-  ];
-
-  type MockedCard = typeof mockedCars[0];
-
-  const handleSeeCarDetails = () => {
-    navigation.navigate('CarDetails');
+  const handleSeeCarDetails = (car: Car) => {
+    navigation.navigate('CarDetails', { car });
   }
+
+  useEffect(() => {
+    const fetchCars = async () => {
+      setLoading(true);
+
+      const { data, error } = await getCarsService();
+
+      if (error) {
+        setLoading(false);
+        setError(error);
+        return;
+      }
+
+      setCars(data);
+      setLoading(false);
+    }
+
+    fetchCars();
+  }, []);
 
   return (
     <>
@@ -55,21 +62,29 @@ export const Home = () => {
       <S.Container>
         <S.Header>
           <Logo width={RFValue(108)} height={RFValue(12)} />
-          <S.TotalCars>Total de 12 carros</S.TotalCars>
+          <S.TotalCars>Total de {cars.length} carros</S.TotalCars>
         </S.Header>
 
-        <S.CardList
-          data={mockedCars}
-          keyExtractor={(item: MockedCard) => String(item.id)}
-          renderItem={({ item }: ListRenderItemInfo<MockedCard>) => (
-            <CardCar 
-              {...item} 
-              activeOpacity={0.6} 
-              onPress={handleSeeCarDetails}
-            />
-          )}
-          ItemSeparatorComponent={() => <S.Separator />}
-        />
+        {!!error && (
+          <S.MessageError>{error}</S.MessageError>
+        )}
+        {loading ? (
+          <Loading />
+        ) : (
+          <S.CardList
+            data={cars}
+            keyExtractor={(item: Car) => item.id}
+            renderItem={({ item }: ListRenderItemInfo<Car>) => (
+              <CardCar 
+                {...item} 
+                icon={getAccessoryIcon(item.fuel_type)}
+                activeOpacity={0.6} 
+                onPress={() => handleSeeCarDetails(item)}
+              />
+            )}
+            ItemSeparatorComponent={() => <S.Separator />}
+          />
+        )}
       </S.Container>
     </>
   );

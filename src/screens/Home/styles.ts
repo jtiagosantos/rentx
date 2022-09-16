@@ -1,6 +1,8 @@
-import { FlatList } from 'react-native';
+import { FlatList, Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
+
+const deviceHeight = Dimensions.get('screen').height;
 
 export const Container = styled.View`
   flex: 1;
@@ -35,4 +37,13 @@ export const CardList = styled(FlatList).attrs({
 
 export const Separator = styled.View`
   height: 16px;
+`;
+
+export const MessageError = styled.Text`
+  font-size: ${RFValue(14)}px;
+  font-family: ${({ theme }) => theme.fonts.primary_400};
+  color: ${({ theme }) => theme.colors.main};
+  text-align: center;
+  padding-top: ${deviceHeight/3}px;
+  background-color: ${({ theme }) => theme.colors.background_tertiary};
 `;
