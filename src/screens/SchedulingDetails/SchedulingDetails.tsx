@@ -3,6 +3,7 @@ import { StatusBar } from 'react-native';
 import { Feather } from  '@expo/vector-icons';
 import { useTheme } from 'styled-components';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { useNavigation } from '@react-navigation/native';
 
 //components
 import { BackButton } from '../../components/BackButton/BackButton';
@@ -23,6 +24,11 @@ import * as S from './styles';
 
 export const SchedulingDetails = () => {
   const theme = useTheme();
+  const navigation = useNavigation();
+
+  const handleRentNow = () => {
+    navigation.navigate('SchedulingComplete');
+  }
 
   return (
     <>
@@ -100,7 +106,11 @@ export const SchedulingDetails = () => {
         </S.Content>
 
         <S.Footer>
-          <Button title='Escolher período do aluguel' />
+          <Button 
+            title='Alugar agora' 
+            color={theme.colors.success}
+            onPress={handleRentNow}
+          />
         </S.Footer>
       </S.Container>
     </>

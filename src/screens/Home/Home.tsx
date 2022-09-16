@@ -1,6 +1,7 @@
 import React from 'react';
 import { StatusBar, ListRenderItemInfo } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { useNavigation } from '@react-navigation/native';
 
 //components
 import { CardCar } from '../../components/CardCar/CardCar';
@@ -12,6 +13,8 @@ import Logo from '../../assets/logo.svg';
 import * as S from './styles';
 
 export const Home = () => {
+  const navigation = useNavigation();
+
   const mockedCars = [
     {
       id: 1,
@@ -37,6 +40,10 @@ export const Home = () => {
 
   type MockedCard = typeof mockedCars[0];
 
+  const handleSeeCarDetails = () => {
+    navigation.navigate('CarDetails');
+  }
+
   return (
     <>
       <StatusBar 
@@ -55,7 +62,11 @@ export const Home = () => {
           data={mockedCars}
           keyExtractor={(item: MockedCard) => String(item.id)}
           renderItem={({ item }: ListRenderItemInfo<MockedCard>) => (
-            <CardCar {...item} />
+            <CardCar 
+              {...item} 
+              activeOpacity={0.6} 
+              onPress={handleSeeCarDetails}
+            />
           )}
           ItemSeparatorComponent={() => <S.Separator />}
         />

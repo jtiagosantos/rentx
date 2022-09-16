@@ -1,4 +1,6 @@
-export interface CardCarProps {
+import { TouchableOpacityProps } from 'react-native';
+
+export interface CardCarProps extends TouchableOpacityProps {
   brand: string;
   name: string;
   rent: {

@@ -9,9 +9,9 @@ import { CardCarProps } from './types';
 //styles
 import * as S from './styles';
 
-export const CardCar: FC<CardCarProps> = ({ brand, name, rent, thumbnail }) => {
+export const CardCar: FC<CardCarProps> = ({ brand, name, rent, thumbnail, ...props }) => {
   return (
-    <S.Container>
+    <S.Container {...props}>
       <S.Details>
         <S.Brand>{brand}</S.Brand>
         <S.Name>{name}</S.Name>

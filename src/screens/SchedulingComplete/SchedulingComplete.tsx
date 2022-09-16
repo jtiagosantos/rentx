@@ -2,6 +2,7 @@ import React from 'react';
 import { StatusBar, useWindowDimensions } from 'react-native';
 import { useTheme } from 'styled-components';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { useNavigation } from '@react-navigation/native';
 
 //assets
 import LogoBackgroundImage from '../../assets/logo_background_gray.svg';
@@ -13,6 +14,11 @@ import * as S from './styles';
 export const SchedulingComplete = () => {
   const theme = useTheme();
   const { width } = useWindowDimensions();
+  const navigation = useNavigation();
+
+  const navigateToHomeScreen = () => {
+    navigation.navigate('Home');
+  }
 
   return (
     <>
@@ -38,7 +44,10 @@ export const SchedulingComplete = () => {
         </S.Content>
 
         <S.Footer>
-          <S.Button activeOpacity={0.6}>
+          <S.Button 
+            activeOpacity={0.6}
+            onPress={navigateToHomeScreen}
+          >
             <S.ButtonText>Ok</S.ButtonText>
           </S.Button>
         </S.Footer>

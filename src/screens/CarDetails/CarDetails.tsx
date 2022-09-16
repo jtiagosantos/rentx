@@ -1,5 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 //components
 import { BackButton } from '../../components/BackButton/BackButton';
@@ -19,6 +20,12 @@ import peopleImage from '../../assets/people.svg';
 import * as S from './styles';
 
 export const CarDetails = () => {
+  const navigation = useNavigation();
+
+  const handleChooseRentalPeriod = () => {
+    navigation.navigate('Scheduling');
+  }
+
   return (
     <>
       <StatusBar 
@@ -67,7 +74,10 @@ export const CarDetails = () => {
         </S.Content>
 
         <S.Footer>
-          <Button title='Escolher período do aluguel' />
+          <Button 
+            title='Escolher período do aluguel' 
+            onPress={handleChooseRentalPeriod}
+          />
         </S.Footer>
       </S.Container>
     </>
