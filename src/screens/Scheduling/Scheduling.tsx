@@ -22,6 +22,10 @@ export const Scheduling: React.FC = () => {
     navigation.navigate('SchedulingDetails');
   }
 
+  const navigateToCarDetailsScreen = () => {
+    navigation.navigate('CarDetails');
+  }
+
   return (
     <>
       <StatusBar 
@@ -33,7 +37,7 @@ export const Scheduling: React.FC = () => {
         <S.Header>
           <BackButton 
             color={theme.colors.background_secondary} 
-            onPress={() => {}} 
+            onPress={navigateToCarDetailsScreen} 
           />
 
           <S.Title>

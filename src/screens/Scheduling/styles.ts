@@ -7,6 +7,7 @@ import { DateValueProps } from './types';
 export const Container = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.background_secondary};
+  padding-top: 10px;
 `;
 
 export const Header = styled.View`

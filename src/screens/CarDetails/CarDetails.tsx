@@ -26,6 +26,10 @@ export const CarDetails = () => {
     navigation.navigate('Scheduling');
   }
 
+  const navigationToHomeScreen = () => {
+    navigation.navigate('Home')
+  }
+
   return (
     <>
       <StatusBar 
@@ -35,7 +39,7 @@ export const CarDetails = () => {
 
       <S.Container>
         <S.Header>
-          <BackButton onPress={() => {}} />
+          <BackButton onPress={navigationToHomeScreen} />
         </S.Header>
 
         <S.ImageSliderWrapper>

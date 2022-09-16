@@ -30,6 +30,10 @@ export const SchedulingDetails = () => {
     navigation.navigate('SchedulingComplete');
   }
 
+  const navigateToSchedulingScreen = () => {
+    navigation.navigate('Scheduling');
+  }
+
   return (
     <>
       <StatusBar 
@@ -39,7 +43,7 @@ export const SchedulingDetails = () => {
 
       <S.Container>
         <S.Header>
-          <BackButton onPress={() => {}} />
+          <BackButton onPress={navigateToSchedulingScreen} />
         </S.Header>
 
         <S.ImageSliderWrapper>
