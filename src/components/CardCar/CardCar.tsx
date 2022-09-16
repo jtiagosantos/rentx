@@ -9,7 +9,14 @@ import { CardCarProps } from './types';
 //styles
 import * as S from './styles';
 
-export const CardCar: FC<CardCarProps> = ({ brand, name, rent, thumbnail, ...props }) => {
+export const CardCar: FC<CardCarProps> = ({ 
+  brand, 
+  name, 
+  icon: Icon,
+  rent, 
+  thumbnail, 
+  ...props 
+}) => {
   return (
     <S.Container {...props}>
       <S.Details>
@@ -23,7 +30,7 @@ export const CardCar: FC<CardCarProps> = ({ brand, name, rent, thumbnail, ...pro
           </S.Rent>
 
           <S.Type>
-            <GasolineImage />
+            <Icon />
           </S.Type>
         </S.About>
       </S.Details>
