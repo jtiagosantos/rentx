@@ -5,7 +5,7 @@ export interface CardCarProps extends TouchableOpacityProps {
   name: string;
   rent: {
     period: string;
-    price: string;
+    price: number;
   };
   thumbnail: string;
 };
