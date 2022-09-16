@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 import {
   useFonts,
@@ -12,7 +13,7 @@ import {
 import * as SplashScreen from 'expo-splash-screen';
 import { ThemeProvider } from 'styled-components';
 
-import { Home } from './src/screens/Home/Home';
+import { AppRoutes } from './src/routes';
 
 import { theme } from './src/styles/theme';
 
@@ -35,7 +36,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Home />
+      <AppRoutes />
     </ThemeProvider>
   );
 }
