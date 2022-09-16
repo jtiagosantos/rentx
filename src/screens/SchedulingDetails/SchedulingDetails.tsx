@@ -31,7 +31,7 @@ export const SchedulingDetails = () => {
   }
 
   const navigateToSchedulingScreen = () => {
-    navigation.navigate('Scheduling');
+    navigation.goBack();
   }
 
   return (

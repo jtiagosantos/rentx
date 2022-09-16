@@ -23,7 +23,7 @@ export const Scheduling: React.FC = () => {
   }
 
   const navigateToCarDetailsScreen = () => {
-    navigation.navigate('CarDetails');
+    navigation.goBack();
   }
 
   return (
