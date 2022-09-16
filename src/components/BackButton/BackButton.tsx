@@ -8,11 +8,11 @@ import { BackButtonProps } from './types';
 //styles
 import * as S from './styles';
 
-export const BackButton: FC<BackButtonProps> = ({ color }) => {
+export const BackButton: FC<BackButtonProps> = ({ color, ...props }) => {
   const theme = useTheme();
 
   return (
-    <S.Container activeOpacity={0.6}>
+    <S.Container activeOpacity={0.6} {...props}>
       <MaterialIcons 
         name='chevron-left'
         size={24}
