@@ -12,7 +12,7 @@ export const getCarsService = async (): Promise<ServiceResponse<Car[]>> => {
       error: null,
       data: response.data,
     };
-  } catch (error) {
+  } catch {
     return {
       error: 'Erro ao carregar a listagem de carros',
       data: null,
