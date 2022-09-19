@@ -4,7 +4,9 @@ import { api } from '../../config/api';
 import { Car } from '../../types/Car';
 import { ServiceResponse } from '../../types/ServiceResponse';
 
-export const getCarsService = async (): Promise<ServiceResponse<Car[]>> => {
+type GetCarsResponse = Promise<ServiceResponse<Car[]>>;
+
+export const getCarsService = async (): GetCarsResponse => {
   try {
     const response = await api.get<Car[]>('/cars');
 
