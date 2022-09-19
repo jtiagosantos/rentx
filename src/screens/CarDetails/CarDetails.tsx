@@ -23,7 +23,7 @@ export const CarDetails = () => {
   const { car } = route.params as { car: Car };
 
   const handleChooseRentalPeriod = () => {
-    navigation.navigate('Scheduling');
+    navigation.navigate('Scheduling', { car });
   }
 
   const navigationToHomeScreen = () => {
