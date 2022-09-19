@@ -1,28 +1,22 @@
 import { api } from '../../config/api';
 
 //types
-import { Car } from '../../types/Car';
+import { MyCar } from '../../types/MyCar';
 import { ServiceResponse } from '../../types/ServiceResponse';
 
 interface GetMyCarsRequest {
   userId: number;
 }
 
-type GetMyCarsResponse = Promise<ServiceResponse<Array<{
-  user_id: number,
-  id: number;
-  car: Car,
-}>>>;
+type GetMyCarsResponse = Promise<ServiceResponse<MyCar[]>>;
 
 export const getMyCarsService = async ({
   userId,
 }: GetMyCarsRequest): GetMyCarsResponse => {
   try {
-    const response = await api.get<Array<{user_id: number, id: number, car: Car}>>(
+    const response = await api.get<MyCar[]>(
       `/schedules_byuser?user_id=${userId}`
     );
-
-    console.log(response.data);
 
     return {
       error: null,
