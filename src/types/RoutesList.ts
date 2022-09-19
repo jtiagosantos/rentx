@@ -6,4 +6,5 @@ export interface RoutesList {
   Scheduling: {car: Car};
   SchedulingDetails: {car: Car, dates: string[]};
   SchedulingComplete: undefined;
+  MyCars: undefined;
 }
