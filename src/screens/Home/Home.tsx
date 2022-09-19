@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { StatusBar, ListRenderItemInfo } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
+import { useTheme } from 'styled-components';
 
 //services
 import { getCarsService } from '../../services/cars/getCarsService';
@@ -24,12 +26,18 @@ import * as S from './styles';
 
 export const Home = () => {
   const navigation = useNavigation();
+  const theme = useTheme();
+
   const [cars, setCars] = useState<Car[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   const handleSeeCarDetails = (car: Car) => {
     navigation.navigate('CarDetails', { car });
+  }
+
+  const handleSeeMyCars = () => {
+    navigation.navigate('MyCars');
   }
 
   useEffect(() => {
@@ -85,6 +93,17 @@ export const Home = () => {
             ItemSeparatorComponent={() => <S.Separator />}
           />
         )}
+
+        <S.MyCarsButton 
+          activeOpacity={0.6}
+          onPress={handleSeeMyCars}
+        >
+          <Ionicons 
+            name='ios-car-sport'
+            size={32} 
+            color={theme.colors.shape}
+          />
+        </S.MyCarsButton>
       </S.Container>
     </>
   );
