@@ -40,6 +40,7 @@ export const SchedulingDetails = () => {
     const { error } = await registerSchedulingService({
       carId: car.id,
       dates,
+      car,
     });
 
     if (error) {
