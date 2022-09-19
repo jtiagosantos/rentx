@@ -79,7 +79,7 @@ export const Home = () => {
         {loading ? (
           <Loading />
         ) : (
-          <S.CardList
+          <S.CarList
             data={cars}
             keyExtractor={(item: Car) => item.id}
             renderItem={({ item }: ListRenderItemInfo<Car>) => (

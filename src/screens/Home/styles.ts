@@ -26,7 +26,7 @@ export const TotalCars = styled.Text`
   margin-bottom: -4px;
 `;
 
-export const CardList = styled(FlatList).attrs({
+export const CarList = styled(FlatList).attrs({
   contentContainerStyle: {
     padding: 24,
   },
