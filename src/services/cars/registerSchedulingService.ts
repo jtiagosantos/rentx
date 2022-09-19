@@ -1,8 +1,12 @@
 import { api } from '../../config/api';
 
+//types
+import { Car } from '../../types/Car';
+
 interface RegisterSchedulingRequest {
   carId: string;
   dates: string[];
+  car: Car;
 }
 
 interface RegisterSchedulingResponse {
@@ -11,9 +15,15 @@ interface RegisterSchedulingResponse {
 
 export const registerSchedulingService = async ({ 
   carId, 
-  dates 
+  dates,
+  car,
 }: RegisterSchedulingRequest): Promise<RegisterSchedulingResponse> => {
   try {
+    await api.post('/schedules_byuser', {
+      user_id: 1,
+      car,
+    });
+
     await api.put(`/schedules_bycars/${carId}`, {
       id: carId,
       unavailable_dates: dates,
