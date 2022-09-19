@@ -34,6 +34,8 @@ export const SchedulingDetails = () => {
 
   const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>({} as RentalPeriod);
 
+  const startDate = dates[0];
+  const endDate = dates.slice(-1)[0];
   const rentTotal = (dates.length * car.rent.price);
 
   const handleConfirmRental = async () => {
@@ -41,6 +43,8 @@ export const SchedulingDetails = () => {
       carId: car.id,
       dates,
       car,
+      startDate: format(getPlatformDate(new Date(startDate)), 'dd/MM/yyyy'),
+      endDate: format(getPlatformDate(new Date(endDate)), 'dd/MM/yyyy'),
     });
 
     if (error) {
@@ -55,9 +59,6 @@ export const SchedulingDetails = () => {
   }
 
   useEffect(() => {
-    const startDate = dates[0];
-    const endDate = dates.slice(-1)[0];
-
     setRentalPeriod({
       startFormatted: format(getPlatformDate(new Date(startDate)), 'dd/MM/yyyy'),
       endFormatted: format(getPlatformDate(new Date(endDate)), 'dd/MM/yyyy'),
