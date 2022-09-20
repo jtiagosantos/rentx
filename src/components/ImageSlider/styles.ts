@@ -1,4 +1,4 @@
-import { Image } from 'react-native';
+import { Image, Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 
 //types
@@ -27,7 +27,7 @@ export const ImageIndex = styled.View<ImageIndexProps>`
 `;
 
 export const CarWrapper = styled.View`
-  width: 100%;
+  width: ${Dimensions.get('screen').width}px;
   height: 132px;
   align-items: center;
   justify-content: center;
