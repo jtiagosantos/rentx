@@ -33,12 +33,15 @@ export const SchedulingDetails = () => {
   const { car, dates } = route.params as { car: Car, dates: string[] };
 
   const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>({} as RentalPeriod);
+  const [isLoading, setIsLoading] = useState(false);
 
   const startDate = dates[0];
   const endDate = dates.slice(-1)[0];
   const rentTotal = (dates.length * car.rent.price);
 
   const handleConfirmRental = async () => {
+    setIsLoading(true);
+
     const { error } = await registerSchedulingService({
       carId: car.id,
       dates,
@@ -46,6 +49,8 @@ export const SchedulingDetails = () => {
       startDate: format(getPlatformDate(new Date(startDate)), 'dd/MM/yyyy'),
       endDate: format(getPlatformDate(new Date(endDate)), 'dd/MM/yyyy'),
     });
+
+    setIsLoading(false);
 
     if (error) {
       return Alert.alert('Agendamento', error);
@@ -146,6 +151,7 @@ export const SchedulingDetails = () => {
             title='Alugar agora' 
             color={theme.colors.success}
             onPress={handleConfirmRental}
+            isLoading={isLoading}
           />
         </S.Footer>
       </S.Container>
