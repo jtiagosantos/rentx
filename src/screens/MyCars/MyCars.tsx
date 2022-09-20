@@ -115,7 +115,7 @@ export const MyCars = () => {
                 </S.CarWrapper>
               )}
               ItemSeparatorComponent={() => <S.Separator />}
-              ListEmptyComponent={() => (
+              ListEmptyComponent={() => !error && (
                 <S.ListEmptyText>
                   Alugue um carro para listar ele aqui
                 </S.ListEmptyText>
