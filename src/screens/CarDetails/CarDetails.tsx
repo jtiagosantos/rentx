@@ -1,6 +1,13 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import Animated, { 
+  useSharedValue, 
+  useAnimatedScrollHandler,
+  useAnimatedStyle,
+  interpolate,
+  Extrapolate,
+} from 'react-native-reanimated';
 
 //components
 import { BackButton } from '../../components/BackButton/BackButton';
@@ -22,6 +29,34 @@ export const CarDetails = () => {
   const route = useRoute();
   const { car } = route.params as { car: Car };
 
+  const scrollY = useSharedValue(0);
+
+  const scrollHandler = useAnimatedScrollHandler({
+    onScroll: (event) => {
+      scrollY.value = event.contentOffset.y;
+    }
+  });
+  const headerStyleAnimation = useAnimatedStyle(() => {
+    return {
+      height: interpolate(
+        scrollY.value,
+        [0, 200],
+        [200, 70],
+        Extrapolate.CLAMP,
+      ),
+    }
+  });
+  const sliderCarsStyleAnimation = useAnimatedStyle(() => {
+    return {
+      opacity: interpolate(
+        scrollY.value,
+        [0, 150],
+        [1, 0],
+        Extrapolate.CLAMP,
+      ),
+    }
+  });
+
   const handleChooseRentalPeriod = () => {
     navigation.navigate('Scheduling', { car });
   }
@@ -38,17 +73,27 @@ export const CarDetails = () => {
       />
 
       <S.Container>
-        <S.Header>
-          <BackButton onPress={navigationToHomeScreen} />
-        </S.Header>
+        <Animated.View style={[headerStyleAnimation]}> 
+          <S.Header>
+            <BackButton onPress={navigationToHomeScreen} />
+          </S.Header>
 
-        <S.ImageSliderWrapper>
-          <ImageSlider 
-            images={car.photos}
-          />
-        </S.ImageSliderWrapper>
+          <Animated.View style={[sliderCarsStyleAnimation, { marginTop: 32 }]}>
+            <ImageSlider 
+              images={car.photos}
+            />
+          </Animated.View>
+        </Animated.View>
 
-        <S.Content>
+        <Animated.ScrollView
+          contentContainerStyle={{
+            padding: 24,
+            alignItems: 'center',
+          }}
+          showsVerticalScrollIndicator={false}
+          onScroll={scrollHandler}
+          scrollEventThrottle={16}
+        >
           <S.Details>
             <S.Description>
               <S.Brand>{car.brand}</S.Brand>
@@ -72,7 +117,7 @@ export const CarDetails = () => {
           </S.Accessories>
 
           <S.About>{car.about}</S.About>
-        </S.Content>
+        </Animated.ScrollView>
 
         <S.Footer>
           <Button 
