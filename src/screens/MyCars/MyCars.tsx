@@ -79,7 +79,9 @@ export const MyCars = () => {
         <S.Content>
           <S.Appointments>
             <S.AppointmentsTitle>Agendamentos feitos</S.AppointmentsTitle>
-            <S.AppointmentsQuantity>{appointmentsQuantity}</S.AppointmentsQuantity>
+            {!loading && (
+              <S.AppointmentsQuantity>{appointmentsQuantity}</S.AppointmentsQuantity>
+            )}
           </S.Appointments>
 
           {!!error && (

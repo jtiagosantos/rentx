@@ -117,7 +117,9 @@ export const Home = () => {
       <S.Container>
         <S.Header>
           <Logo width={RFValue(108)} height={RFValue(12)} />
-          <S.TotalCars>Total de {cars.length} carros</S.TotalCars>
+          {!loading && (
+            <S.TotalCars>Total de {cars.length} carros</S.TotalCars>
+          )}
         </S.Header>
 
         {!!error && (
