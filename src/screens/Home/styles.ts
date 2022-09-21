@@ -47,17 +47,3 @@ export const MessageError = styled.Text`
   padding-top: ${deviceHeight/3}px;
   background-color: ${({ theme }) => theme.colors.background_tertiary};
 `;
-
-export const MyCarsButton = styled(TouchableOpacity)`
-  width: 60px;
-  height: 60px;
-  background-color: ${({ theme }) => theme.colors.main};
-  border-radius: 30px;
-
-  position: absolute;
-  right: 22px;
-  bottom: 13px;
-
-  align-items: center;
-  justify-content: center;
-`;
