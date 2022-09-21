@@ -3,7 +3,8 @@ import {
   StatusBar, 
   ListRenderItemInfo, 
   TouchableOpacity, 
-  StyleSheet, 
+  StyleSheet,
+  BackHandler, 
 } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useNavigation } from '@react-navigation/native';
@@ -99,6 +100,10 @@ export const Home = () => {
     }
 
     fetchCars();
+  }, []);
+
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', () => null);
   }, []);
 
   return (
