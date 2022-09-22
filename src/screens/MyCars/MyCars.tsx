@@ -8,7 +8,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { getMyCarsService } from '../../services/cars/getMyCarsService';
 
 //components
-import { Loading } from '../../components/Loading/Loading';
+import { CarLoading } from '../../components/CarLoading/CarLoading';
 import { BackButton } from '../../components/BackButton/BackButton';
 import { CardCar } from '../../components/CardCar/CardCar';
 
@@ -89,7 +89,7 @@ export const MyCars = () => {
           )}
 
           {loading ? (
-            <Loading />
+            <CarLoading />
           ) : (
             <S.CarList
               data={cars}

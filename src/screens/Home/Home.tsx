@@ -23,7 +23,7 @@ import { getCarsService } from '../../services/cars/getCarsService';
 
 //components
 import { CardCar } from '../../components/CardCar/CardCar';
-import { Loading } from '../../components/Loading/Loading';
+import { CarLoading } from '../../components/CarLoading/CarLoading';
 
 //utils
 import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
@@ -126,7 +126,7 @@ export const Home = () => {
           <S.MessageError>{error}</S.MessageError>
         )}
         {loading ? (
-          <Loading />
+          <CarLoading />
         ) : (
           <S.CarList
             data={cars}
